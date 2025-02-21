@@ -13,3 +13,51 @@ Take some time to look at that. Were you able to create a database and access it
 
 On a scale from 1-10, how easy would it be for a your average developer to figure this out?
 
+---
+
+## What is SQLite
+
+Created by D. Richard Hipp to be an embedded SQL database requiring minimal setup / 2000. Soon adopted in Python, PHP, and OS projects. It's used in a wide range of applications.
+
+Zero setup, no configuration, it's just a file (well, not really) (it has a built-in engine that executes SQL), fast, you can just copy it and move it, [ACID](https://en.wikipedia.org/wiki/ACID) compliant - but uses a single write lock. MySQL and PostgresSQL support multi-thread.
+
+When you're first learning these database concepts and tools - you're really not concerned with high-traffic situations - so, you may as well choose something that lets you focus on _learning_.
+
+## We're using PHP - so, how do you use SQLite in that context?
+
+You'll see "PDO" (which stands for **P**HP **D**ata **O**bjects apparently). It's a built-in PHP extension that provides a unified, object-oriented interface for interacting with databases. It acts as a database abstraction layer, meaning you can use the same functions to work with MySQL, PostgreSQL, SQLite, and other databases without changing much of your code.
+
+### Why not just write raw SQL queries?
+
+### Use any database with the same interface
+
+Raw queries are tied to the specific database and PDO works for all / and you could switch types later. Gives you a unified way to fetch data.
+
+```
+function getRecordById($table, $id) {
+	// who cares how it works
+	// like making any reusable things
+}
+```
+
+### Security
+
+```
+$name = $_GET['name']; 
+$query = "SELECT * FROM users WHERE name = '$name'";
+$result = $db->query($query);
+```
+Someone could mess you up! The data and the query are together. (SQL injection)
+
+### Prepared statements / easier to read and maintain
+
+```
+$stmt = $db->prepare("SELECT * FROM users WHERE name = ?");
+$stmt->execute([$name]);
+```
+
+PDO prepares the query and the data seperatly and automatically escapes the possibly dangerous input.
+
+(and there are some other benefits too, but you get the point)
+
+---
