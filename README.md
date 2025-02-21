@@ -95,4 +95,55 @@ $db->prepare($sql);
 Prepares a SQL statement to safely accept user input.
 
 
+## Structured Query Language
+
+We should probably talk about what the `$sql`. It's the language you use to talk to the database. "Query" feels like a _question_ but it's not only for asking for and _retrieving_ data. But PDO sorta fixes that idea with it's abstraction layer.
+
+**Core commands of SQL**
+
+- `SELECT`: retrieves data
+- `INSERT`: adds new data
+- `UPDATE`: modifies existing data
+- `DELETE`: removes data
+- `CREATE TABLE`: sets up new tables
+- `ALTER TABLE`: changes table structure
+
+SQL keywords like SELECT, INSERT, UPDATE, etc., don’t have to be uppercase—it’s just a convention for readability.
+
+A general "Statement" does something (creates, modifies, or removes data).
+ 
+A "Query" asks for data.
+
+**Example statements**
+
+(in order if practial need)
+
+A database is just a file until you give it some structure. The database is often already in place, but we're learning here... so, you'll have to actually create some data to work with. In SQL, you define that structure with `CREATE TABLE`. The value types and the primary key and foriegn keys and autoincrement are something we can talk about as we go.
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    age INTEGER
+);
+```
+
+To use PHP, you'll need some type of LAMP stack set up. You can use MAMP or Herd or anything you want. We have a whole workshop on the options.
+
+Use a visual interface like Sequel Pro or TablePlus to view your database.
+
+Create a sqlite database file and an entry point (index.php) to try it out. (see our files for usage).
+
+<picture>
+	<img src='images/new-users-table.png' width='700' />
+</picture>
+
+The sqlite file was empty before. Now look at it!
+
+<picture>
+	<img src='images/sqlite-file.png' width='700' />
+</picture>
+
+Make some other tables with other column names and practice. What if you need to delete or change one?
+
 
