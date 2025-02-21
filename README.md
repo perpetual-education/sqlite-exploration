@@ -33,7 +33,7 @@ You'll see "PDO" (which stands for **P**HP **D**ata **O**bjects apparently). It'
 
 Raw queries are tied to the specific database and PDO works for all / and you could switch types later. Gives you a unified way to fetch data.
 
-```
+```js
 function getRecordById($table, $id) {
 	// who cares how it works
 	// like making any reusable things
@@ -42,7 +42,7 @@ function getRecordById($table, $id) {
 
 ### Security
 
-```
+```php
 $name = $_GET['name']; 
 $query = "SELECT * FROM users WHERE name = '$name'";
 $result = $db->query($query);
@@ -51,7 +51,7 @@ Someone could mess you up! The data and the query are together. (SQL injection)
 
 ### Prepared statements / easier to read and maintain
 
-```
+```php
 $stmt = $db->prepare("SELECT * FROM users WHERE name = ?");
 $stmt->execute([$name]);
 ```
@@ -64,7 +64,7 @@ PDO prepares the query and the data seperatly and automatically escapes the poss
 
 ## Using PDO
 
-```
+```php
 $myAmazingDatabase = new PDO('sqlite:database-name.sqlite');
 
 $db = new PDO('sqlite:database-name.sqlite');
@@ -74,22 +74,22 @@ $db = new PDO('sqlite:database-name.sqlite');
 
 What does this object/interface offer us?
 
-```
+```php
 $db->setAttribute(options);
 ```
 Customizes how PDO behaves when interacting with a database. How errors are handled, how query results are returned, etc
 
-```
+```php
 $db->exec($sql);
 ```
 Executes a SQL command when you don’t need results back, creating tables, inserting data, deleting things.
 
-```
+```php
 $db->query($sql);
 ```
 Executes a SQL query and returns results (for SELECT statements).
 
-```
+```php
 $db->prepare($sql);
 ```
 Prepares a SQL statement to safely accept user input.
