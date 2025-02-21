@@ -61,3 +61,38 @@ PDO prepares the query and the data seperatly and automatically escapes the poss
 (and there are some other benefits too, but you get the point)
 
 ---
+
+## Using PDO
+
+```
+$myAmazingDatabase = new PDO('sqlite:database-name.sqlite');
+
+$db = new PDO('sqlite:database-name.sqlite');
+
+// for simplicity, you might choose to use $db (but it's just a variable, right?)
+```
+
+What does this object/interface offer us?
+
+```
+$db->setAttribute(options);
+```
+Customizes how PDO behaves when interacting with a database. How errors are handled, how query results are returned, etc
+
+```
+$db->exec($sql);
+```
+Executes a SQL command when you don’t need results back, creating tables, inserting data, deleting things.
+
+```
+$db->query($sql);
+```
+Executes a SQL query and returns results (for SELECT statements).
+
+```
+$db->prepare($sql);
+```
+Prepares a SQL statement to safely accept user input.
+
+
+
