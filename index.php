@@ -59,7 +59,10 @@ function createUser($db, $name, $age) {
 
 // if the post was submitted (re-requesting the page now... )
 if ( isset( $_POST['create_user']) ) {
-	createUser( $db, $_POST['first_name'], $_POST['age'] );
+	if ( createUser( $db, $_POST['first_name'], $_POST['age'] ) ) {
+		header("Location: " . $_SERVER['PHP_SELF']);
+		exit;
+	}
 }
 
 $people = $db->query("SELECT * FROM users")->fetchAll();

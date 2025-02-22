@@ -218,5 +218,25 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // just a bit more difficult to read because the class PDO:: and the UPPERCASE_CONSTANT yelling
 ```
 
+## Ensuring the data isn't submitted twice on refresh
+
+Right now, we're sending a POST request to the server. The server processes that request and then returns the same form page. If you then refresh that page (_in our case we're doing that more than usual for testing it_) the browser doesn't know if the form was processed already - so, it asks "Do you want to resend this data?" And if you say “Yes”, the browser doesn’t actually have `$_POST` in memory—but it does remember the entire last request (including the form data). Then, it resends the exact same request to the server. (make sure you've seen this happen / or force it to happen so you know for sure what we're talking about)
+
+So, to get around this - there's probably many things you could try. But a common pattern is the "Post/Redirect/Get" (PRG) pattern. The user will submit the form, process form, then you redirect to the same page with a new GET request, now if you were to refresh - the page wouldn't have any history to confuse things.
+
+```php
+if (isset($_POST['create_user'])) {
+
+	// if the create function returns true (meaning it worked)
+    if ( createUser($) ) { 
+
+        // redirect to clear the POST data
+        header("Location: " . $_SERVER['PHP_SELF']);
+
+        // and stop further execution
+        exit;
+    }
+}
+```
 
 
