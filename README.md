@@ -206,3 +206,17 @@ You can see the `NOT NULL` "constraint" added to the column in the `users` table
 Try a bunch of things out. Challenge: how could you ensure that the errors show up right next to the specific field?
 
 Depending on your form, you might have good reason to show all of the errors at the top or bottom near the submit button. But it's good to have options. And in some cases, you might have different errors for different validations like the age being a number, bigger than 0, and not bigger than 200 or something. But - moving on.
+
+To get the SQL errors to show, you'll need to comment out all the conditional checks for proper input, but that isn't enough. The errors won't show unless you tell them to - and that's in the `setAttribute()` world. The docs are in this case a reference with every possible option just listed with no real story for "most important", "second most important" or any practical roll-out, so it feels like you'd just _have to know_. That's a bummer! And if you'd like to help make it better, you can!
+
+```php
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//                     setting name, value
+
+// simple, but 
+// just a bit more difficult to read because the class PDO:: and the UPPERCASE_CONSTANT yelling
+```
+
+
+
