@@ -199,3 +199,8 @@ What happens if the fields are empty and you submit? What about when you refresh
 	<img src='images/missing-values.png' width='700' />
 </picture>
 
+## Ensuring the data is correct before it goes in the database
+
+You can see the `NOT NULL` "constraint" added to the column in the `users` table. But that doesn't check for empty strings. So, there are some constraints on the database side but other considerations have to happen in the app logic.
+
+Try a bunch of things out. Challenge: how could you ensure that the errors show up right next to the specific field?

@@ -10,12 +10,22 @@ $db->exec("CREATE TABLE IF NOT EXISTS users (
     age INTEGER
 )");
 
-
+$errors = []; // there might be many errors
 
 function createUser($db, $name, $age) {
 	// somehow you need to have the reference to the database available in this scope
 
-	$db->exec("INSERT INTO users (name, age) VALUES ('$name', '$age')");
+	global $errors; // a different way to get an outside variable in this scope
+
+	if ( !empty($name) ) {
+		$db->exec("INSERT INTO users (name, age) VALUES ('$name', '$age')");
+	} else {
+		$errors[] = "Please add a name before we can save this record";
+	}
+
+	if (!is_numeric($age) || $age < 0) {
+    	$errors[] = "Please enter a valid age.";
+	}
 
 	// should it have some sort of return value?
 	// could it fail?
@@ -39,11 +49,19 @@ $people = $db->query("SELECT * FROM users")->fetchAll();
 		<span>First name</span>
 		<input type='text' name='first_name'>
 	</label>
-	
+
 	<label>
 		<span>Age</span>
 		<input type='number' name='age'>
 	</label>
+
+	<?php if ( !empty($errors) ) { ?>
+		<ul class='error-list'>
+			<?php foreach ($errors as $error) { ?>
+				<li><?=$error?></li>
+			<?php } ?>
+		</ul>
+	<?php } ?>
 
 	<div class='actions'>
 		<button type='submit' name='create_user'>Add</button>
@@ -106,5 +124,7 @@ $people = $db->query("SELECT * FROM users")->fetchAll();
 
 			margin-top: 10px;
 		}
+		.error-list {
+			color: red;
 	}
 </style>
