@@ -181,3 +181,21 @@ If you just write your code in the middle of the page, well - that code is going
 So, it's up to you if you want to make a form - or write some logic to only create a user if it hasn't been created or something. You can also write the queries right in TablePlus or whatever db visual interface you're using (but that would be to practice SQL and not really sqlite integration via code);
 
 Do some stuff. Practice making a bunch of records. And try to delete some?
+
+## Progromatically creating and deleting records
+
+Looks like we'll have to make some basic forms.
+
+```php
+$people = $db->query("SELECT * FROM users")->fetchAll();
+```
+The `*` here doesn't just mean "all" users -- but _all column data_ from each user too.
+
+Get those people showing up! And consider making detail pages maybe? Or creating other tables and deleting and editing?
+
+What happens if the fields are empty and you submit? What about when you refresh the page and it asks to resubmit and adds another person you didn't want?
+
+<picture>
+	<img src='images/missing-values.png' width='700' />
+</picture>
+
