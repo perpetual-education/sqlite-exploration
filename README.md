@@ -146,4 +146,38 @@ The sqlite file was empty before. Now look at it!
 
 Make some other tables with other column names and practice. What if you need to delete or change one?
 
+## Creating records
 
+```sql
+INSERT INTO users (name, age) VALUES ('Andy', 32);
+```
+
+Something like this?
+
+```php
+$db->exec("INSERT INTO users (name, age) VALUES ('Andy', 32)");
+
+// execute this database command
+// what type of command?
+// where? what type of record? in what table?
+// what columns?
+// what values for those columns?
+```
+
+`users.create('Andy', 32);` 
+
+might be another way you could design this - or 
+
+`SAVE { name: "Andy", age: 32 } as USER`
+
+(so many ways this _could_ be... but it's the way it is)
+
+<picture>
+	<img src='images/first-users.png' width='700' />
+</picture>
+
+If you just write your code in the middle of the page, well - that code is going to run every time you refresh the browser (making a request to the server to run that program, right?). Notice how the `id` is automatically added and incremented.
+
+So, it's up to you if you want to make a form - or write some logic to only create a user if it hasn't been created or something. You can also write the queries right in TablePlus or whatever db visual interface you're using (but that would be to practice SQL and not really sqlite integration via code);
+
+Do some stuff. Practice making a bunch of records. And try to delete some?
