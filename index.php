@@ -68,13 +68,8 @@ $people = $db->query("SELECT * FROM users")->fetchAll();
 		<?=showError('age');?>
 	</label>
 
-	<?php if ( !empty($errors) ) { ?>
-		<ul class='error-list'>
-			<?php foreach ($errors as $error) { ?>
-				<li class='error'><?=$error?></li>
-			<?php } ?>
-		</ul>
-	<?php } ?>
+	<!-- anything that gets too complicated to look at can be moved to it's own file -->
+	<?php include('error-list.php'); ?>
 
 	<div class='actions'>
 		<button type='submit' name='create_user'>Add</button>
@@ -82,17 +77,8 @@ $people = $db->query("SELECT * FROM users")->fetchAll();
 </form>
 
 
-<ul>
-	<?php foreach ($people as $person) { ?>
-		<li>
-			<article>
-				<?=$person['name']?>
-			</article>
-		</li>
-	<?php } ?>
-</ul>
 
-
+<?php include('people-list.php'); ?>
 
 
 
