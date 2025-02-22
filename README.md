@@ -204,3 +204,5 @@ What happens if the fields are empty and you submit? What about when you refresh
 You can see the `NOT NULL` "constraint" added to the column in the `users` table. But that doesn't check for empty strings. So, there are some constraints on the database side but other considerations have to happen in the app logic.
 
 Try a bunch of things out. Challenge: how could you ensure that the errors show up right next to the specific field?
+
+Depending on your form, you might have good reason to show all of the errors at the top or bottom near the submit button. But it's good to have options. And in some cases, you might have different errors for different validations like the age being a number, bigger than 0, and not bigger than 200 or something. But - moving on.

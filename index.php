@@ -12,6 +12,15 @@ $db->exec("CREATE TABLE IF NOT EXISTS users (
 
 $errors = []; // there might be many errors
 
+function showError($name) {
+	global $errors;
+
+	if ($errors[$name]) {
+		$message = $errors[$name];
+		return "<p class='error'>$message</p>";
+	}
+}
+
 function createUser($db, $name, $age) {
 	// somehow you need to have the reference to the database available in this scope
 
@@ -20,11 +29,11 @@ function createUser($db, $name, $age) {
 	if ( !empty($name) ) {
 		$db->exec("INSERT INTO users (name, age) VALUES ('$name', '$age')");
 	} else {
-		$errors[] = "Please add a name before we can save this record";
+		$errors['first_name'] = "Please add a name before we can save this record";
 	}
 
 	if (!is_numeric($age) || $age < 0) {
-    	$errors[] = "Please enter a valid age.";
+    	$errors['age'] = "Please enter a valid age.";
 	}
 
 	// should it have some sort of return value?
@@ -48,17 +57,21 @@ $people = $db->query("SELECT * FROM users")->fetchAll();
 	<label>
 		<span>First name</span>
 		<input type='text' name='first_name'>
+
+		<?=showError('first_name');?>
 	</label>
 
 	<label>
 		<span>Age</span>
 		<input type='number' name='age'>
+
+		<?=showError('age');?>
 	</label>
 
 	<?php if ( !empty($errors) ) { ?>
 		<ul class='error-list'>
 			<?php foreach ($errors as $error) { ?>
-				<li><?=$error?></li>
+				<li class='error'><?=$error?></li>
 			<?php } ?>
 		</ul>
 	<?php } ?>
@@ -124,7 +137,8 @@ $people = $db->query("SELECT * FROM users")->fetchAll();
 
 			margin-top: 10px;
 		}
-		.error-list {
+		.error {
 			color: red;
+		}
 	}
 </style>
