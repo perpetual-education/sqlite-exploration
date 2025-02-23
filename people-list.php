@@ -1,3 +1,7 @@
+<?php
+	$people = $db->query("SELECT * FROM users")->fetchAll();
+?>
+
 
 <?php if ( !empty($people) ): ?>
 

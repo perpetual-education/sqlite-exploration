@@ -239,4 +239,8 @@ if (isset($_POST['create_user'])) {
 }
 ```
 
+## Tidying up
 
+This code will start to look pretty ugly (in our opinion). So, maybe we can clean up it up a little? Tidy up / abstract a few things away?
+
+Will this make things better - or more confusing? Depends on the person. Do what is best for you.
